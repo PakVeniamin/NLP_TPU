@@ -36,6 +36,39 @@ class TFIDF:
             tfidf[word] = freq * idf[word]
         return tfidf
     
+    def tf(self, document):
+        return self.term_frequency(document)
+
+    def idf(self):
+        return self.inverse_document_frequency()
+    
+
+documents = [
+    "This is the first document",
+    "This document is the second document",
+    "And this is the third one",
+    "Is this the first document",
+]
+
+# tfidf_calculator = TFIDF(documents)
+
+# # Вывод TF-IDF вектора для каждого документа
+# for idx, doc in enumerate(documents):
+#     print("\nTF-IDF Vector for Document", idx+1)
+#     tfidf_vector = tfidf_calculator.tf_idf(doc)
+#     print(tfidf_vector)
+
+# # Вывод TF для каждого документа
+# for idx, doc in enumerate(documents):
+#     print("\nTF for Document", idx+1)
+#     tf_vector = tfidf_calculator.tf(doc)
+#     print(tf_vector)
+
+# # Вывод IDF для всего корпуса документов
+# print("\nIDF for Vocabulary")
+# idf_values = tfidf_calculator.idf()
+# print(idf_values)
+    
 
 class BagOfWords:
     def __init__(self):
@@ -60,6 +93,28 @@ class BagOfWords:
                     vector[index] += 1
             vectors.append(vector)
         return vectors
+    
+documents = [
+    "This is the first document",
+    "This document is the second document",
+    "And this is the third one",
+    "Is this the first document",
+]
+
+# Создаем экземпляр класса BagOfWords
+bow = BagOfWords()
+
+# Обучаем модель на документах
+bow.fit(documents)
+
+# Преобразуем документы в векторы мешка слов
+bow_vectors = bow.transform(documents)
+
+# Вывод результатов
+print("Vocabulary:", bow.vocabulary)
+print("\nBag of Words Vectors:")
+for idx, vector in enumerate(bow_vectors):
+    print("Document", idx+1, ":", vector)
 
 """История для Word2Vec"""
 
